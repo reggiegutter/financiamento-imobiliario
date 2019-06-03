@@ -33,21 +33,21 @@ class FormController {
 
 
     _validateForm() {
-        if (this._property.validity.rangeOverflow) this._setError(this._property, 'Precisando de dinheiro para comprar um imóvel de mais de 5 milhões?');
-        if (this._property.validity.rangeUnderflow) this._setError(this._property, 'Existe imóvel negativo? Quer que alguém te pague para levar o imóvel? Ainda quer financiar?');
-        if (this._property.validity.valueMissing) this._setError(this._property, 'É MUITO IMPORTANTE para o cálculo que você informe o valor do imóvel que pretende adquirir.');
+        if (this._property.validity.rangeOverflow) this._setError(this._property, 'O valor máximo do imóvel nesta simulação é de 5 milhões');
+        if (this._property.validity.rangeUnderflow) this._setError(this._property, 'Não existe imóvel negativo');
+        if (this._property.validity.valueMissing) this._setError(this._property, 'Qual o valor do imóvel?');
 
-        if (this._initialPayment.validity.rangeUnderflow) this._setError(this._initialPayment, 'Ao invés de pagar a entrada, você quer receber uma entrada por comprar um imóvel? É isso mesmo?');
+        if (this._initialPayment.validity.rangeUnderflow) this._setError(this._initialPayment, 'O valor da entrada deve ser maior do que ZERO.');
 
-        if (this._rate.validity.rangeUnderflow) this._setError(this._rate, 'Até onde sei, banco no brasil não te empresta dinheiro com juros negativos. Se souber de algum, favor avisar!');
-        if (this._rate.validity.valueMissing) this._setError(this._rate, 'Ainda não tenho o poder da premonição. Preciso que informe o valor da taxa de juros cobrada.');
+        if (this._rate.validity.rangeUnderflow) this._setError(this._rate, 'O valor da taxa de juros cobrada deve ser maior do que ZERO.');
+        if (this._rate.validity.valueMissing) this._setError(this._rate, 'Qual o valor da taxa de juros cobrada?');
 
         if (this._term.validity.rangeOverflow) this._setError(this._term, 'Para o seu bem, não seja um DEVEDOR por mais de 420 meses (35 anos!)');
-        if (this._term.validity.rangeUnderflow) this._setError(this._term, 'Sério, qual o prazo mínimo de financiamento?');
-        if (this._term.validity.valueMissing) this._setError(this._term, 'Por obséquio, favor preencher o Prazo do Financiamento. A diretoria agradece.');
+        if (this._term.validity.rangeUnderflow) this._setError(this._term, 'O prazo mínimo do financiamento é de 100 meses.');
+        if (this._term.validity.valueMissing) this._setError(this._term, 'Qual o prazo de financiamento?');
 
-        if (this._insurancePrice.validity.rangeOverflow) this._setError(this._insurancePrice, 'Pelo valor cobrado pelo seguro, o pé já está na cova.');
-        if (this._insurancePrice.validity.rangeUnderflow) this._setError(this._insurancePrice, 'Desiste, nada é de graça. Pague o seguro.');
+        if (this._insurancePrice.validity.rangeOverflow) this._setError(this._insurancePrice, 'Esse valor do seguro + taxas está muito alto. Valor máximo permitido: R$ 1.000,00.');
+        if (this._insurancePrice.validity.rangeUnderflow) this._setError(this._insurancePrice, 'Qual o valor do seguro + taxas cobrado?');
     }
 
     _setError(component, message) {
