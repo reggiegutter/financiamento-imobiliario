@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Simulação de Financiamento Imbobiliário</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center display-4">Simulação de Financiamento Imobiliário!</h1>
+
+        <hr class="my-4">
+
+        <div id="alertMessage" role="alert">
+        </div>
+
+        <div class="row">
+            <div class="col-8">
+                <div id="divFormulario">
+                    <form onchange="formController.change()">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="propertyValue"><b>Valor do imóvel:</b></label>
+                                <input type="number" name="propertyValue" id="propertyValue" class="form-control money"
+                                    placeholder="Valor do imóvel" aria-describedby="propertyValueHelper" min="50000"
+                                    max="5000000" required value="500000" step="10000">
+                                <small id="propertyValueHelper" class="form-text text-muted">
+                                    Informe o valor do imóvel que está querendo comprar.
+                                </small>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="initialPayment"><b>Valor da Entrada:</b></label>
+                                <input type="number" name="initialPayment" id="initialPayment"
+                                    class="form-control money" placeholder="Valor da Entrada" required
+                                    aria-describedby="initialPaymentHelper" value="100000" min="0" step="10000">
+                                <small id="initialPaymentHelper" class="form-text text-muted">
+                                    Valor pago a vista no momento da compra do imóvel.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="rate"><b>Taxa de Juros Efetivos a.a.:</b></label>
+                                <input type="number" name="rate" id="rate" class="form-control"
+                                    placeholder="Taxa do financiamento anual" aria-describedby="rateHelper" required
+                                    value="8.7499" step="0.1" min="0">
+                                <small id="rateHelper" class="form-text text-muted">
+                                    Valor da taxa de financiamento anual
+                                </small>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="term"><b>Prazo:</b></label>
+                                <input type="number" name="term" id="term" min="120" max="420" value="420"
+                                    class="form-control" placeholder="Prazo" aria-describedby="termHelper" required
+                                    step="10">
+                                <small id="termHelper" class="form-text text-muted">
+                                    Prazo de financiamento do imóvel
+                                </small>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="insurancePrice"><b>Seguro + Tarifas:</b></label>
+                                <input type="number" name="insurancePrice" id="insurancePrice"
+                                    class="form-control money" placeholder="Seguro + tarifas" value="135.2" min="0"
+                                    max="1000" step="10" aria-describedby="insurancePriceHelper">
+                                <small id="insurancePriceHelper" class="form-text text-muted">
+                                    Seguro de Morte, Invalidez Permanente, Danos ao Imóvel e
+                                    Taxa de Administração
+                                </small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card">
+                    <div id="formInformationsView" class="card-body"> </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-8">
+                <table class="table table-sm table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Prestação</th>
+                            <th scope="col">Juros</th>
+                            <th scope="col">Amortização</th>
+                            <th scope="col">Saldo Devedor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultTableTBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-4">
+                <div class="card">
+                    <div id="resultInformations" class="card-body"> </div>
+                    <div>
+                        <p class="text-center text-warning font-weight-bold">Está lembrando de pagar:</p>
+                        <p class="text-center">
+                            <span class="badge badge-warning">ITBI</span>
+                            <span class="badge badge-warning">Avaliação do Engenheiro</span>
+                            <span class="badge badge-warning">cartório</span>
+                            <span class="badge badge-warning">reformas</span>
+                            <span class="badge badge-warning">...</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="text-center">Última atualização em <b><em>03/06/2019</em></b></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="assets/js/view/View.js"></script>
+    <script src="assets/js/model/Financing.js"></script>
+    <script src="assets/js/model/Message.js"></script>
+    <script src="assets/js/view/MessageView.js"></script>
+    <script src="assets/js/view/FormInformationsView.js"></script>
+    <script src="assets/js/view/ResultTableView.js"></script>
+    <script src="assets/js/view/ResultInformationsView.js"></script>
+    <script src="assets/js/controller/FormController.js"></script>
+
+    <script>
+        let formController = new FormController();
+    </script>
+</body>
+
+</html>
