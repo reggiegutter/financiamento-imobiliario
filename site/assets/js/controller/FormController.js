@@ -43,7 +43,7 @@ class FormController {
         if (this._rate.validity.valueMissing) this._setError(this._rate, 'Qual o valor da taxa de juros cobrada?');
 
         if (this._term.validity.rangeOverflow) this._setError(this._term, 'Para o seu bem, não seja um DEVEDOR por mais de 420 meses (35 anos!)');
-        if (this._term.validity.rangeUnderflow) this._setError(this._term, 'O prazo mínimo do financiamento é de 100 meses.');
+        if (this._term.validity.rangeUnderflow) this._setError(this._term, 'O prazo mínimo do financiamento é de 60 meses (5 anos).');
         if (this._term.validity.valueMissing) this._setError(this._term, 'Qual o prazo de financiamento?');
 
         if (this._insurancePrice.validity.rangeOverflow) this._setError(this._insurancePrice, 'Esse valor do seguro + taxas está muito alto. Valor máximo permitido: R$ 1.000,00.');
